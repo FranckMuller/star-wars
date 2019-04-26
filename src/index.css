@@ -5,4 +5,13 @@
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;
+  padding-bottom: 30px;
+}
+
+.row {
+  margin-bottom: 30px;
+}
+
+.row:last-child {
+  margin-bottom: 0;
 }

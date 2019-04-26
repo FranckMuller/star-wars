@@ -8,6 +8,11 @@
   background-color: transparent;
 }
 
+.item-list .list-group-item > span {
+  display: flex;
+  justify-content: space-between;
+}
+
 .item-list .lds-css, .item-list .error-indicator {
   margin: 20px auto;
 }

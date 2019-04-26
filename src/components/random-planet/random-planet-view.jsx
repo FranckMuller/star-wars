@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 
 const RandomPlanetView = ({ planet }) => {
-  const { imageId, name, population, rotationPeriod, diameter } = planet;
+  const { id, name, population, rotationPeriod, diameter } = planet;
   return (
     <Fragment>
       <img className="planet-image"
-             src={`https://starwars-visualguide.com/assets/img/planets/${imageId}.jpg`} alt={name} />
+             src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} alt={name} />
         <div>
           <h4>{name}</h4>
           <ul className="list-group list-group-flush">

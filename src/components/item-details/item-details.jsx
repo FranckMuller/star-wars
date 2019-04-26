@@ -1,15 +1,12 @@
 import React, { Component, Fragment } from 'react';
+import ErrorButton from '../error-button';
 
-import SwapiService from '../../services/swapi-service';
+import './item-details.css';
 
-import './person-details.css';
-
-class PersonDetails extends Component {
-
-  swapiService = new SwapiService();
+class ItemDetails extends Component {
 
   state = {
-    person: null
+    item: null
   };
 
   componentDidMount() {
@@ -23,53 +20,54 @@ class PersonDetails extends Component {
   };
 
   updatePerson() {
-    const { selectedItemId } = this.props;
+    const { getData, selectedItemId } = this.props;
     if(!selectedItemId) return;
-    this.swapiService.getPerson(selectedItemId)
-      .then((person) => {
+    getData(selectedItemId)
+      .then((item) => {
         this.setState({
-          person
+          item
         })
       });
   };
 
   render() {
-    const { person } = this.state;
-    const view = person ? <ViewItemDetails person={person} /> : <span>Choose a person from list</span>  
+    const { item } = this.state;
+    const view = item ? <ViewItemDetails item={item} /> : <span>Choose a person from list</span>  
 
     return (
-      <div className="person-details card">
+      <div className="item-details card">
         {view}
       </div>
     );
   };
 };
 
-const ViewItemDetails = ({ person }) => {
+const ViewItemDetails = ({ item }) => {
   return (
     <Fragment>
-      <img className="person-image"
-          src={`https://starwars-visualguide.com/assets/img/characters/${person.id}.jpg`} alt={person.name} />
+      <img className="item-image"
+          src={item.image} alt={item.name} />
 
         <div className="card-body">
-          <h4>{person.name}</h4>
+          <h4>{item.name}</h4>
           <ul className="list-group list-group-flush">
             <li className="list-group-item">
               <span className="term">Gender</span>
-              <span>{person.gender}</span>
+              <span>{item.gender}</span>
             </li>
             <li className="list-group-item">
               <span className="term">Birth Year</span>
-              <span>{person.birthYear}</span>
+              <span>{item.birthYear}</span>
             </li>
             <li className="list-group-item">
               <span className="term">Eye Color</span>
-              <span>{person.eyeColor}</span>
+              <span>{item.eyeColor}</span>
             </li>
           </ul>
+          <ErrorButton />
         </div>
     </Fragment>
   );
 };
 
-export default PersonDetails;
+export default ItemDetails;

@@ -1,0 +1,9 @@
+.error-button {
+  margin-bottom: 30px;
+  color: #ffffff;
+  border-width: 2px;
+}
+
+.error-button:hover {
+  background-color: rgba(231, 76, 60, .3);
+}

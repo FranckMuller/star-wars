@@ -34,26 +34,28 @@ class ItemList extends Component {
   };
 
   onGetData = () => {
-    this.swapiService.getAllPeople()
+    const { getData } = this.props;
+    getData()
       .then(this.onUpdateData)
       .catch(this.onError);
   };
 
   onItemSelected = (id) => {
     this.props.onItemSelected(id);
-  }
+  };
 
   renderItems(arr) {
     return arr.map((item) => {
+      const label = this.props.children(item);
       return (
         <li 
           key={item.id}
           className="list-group-item"
           onClick={() => this.onItemSelected(item.id)}>
-          {item.name}
+          {label}
         </li>   
       );
-    })
+    });
   };
 
   render() {

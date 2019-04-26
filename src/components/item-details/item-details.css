@@ -1,4 +1,4 @@
-.person-details {
+.item-details {
   display: flex;
   /* margin-top: 1rem; */
   flex-direction: row;
@@ -7,18 +7,22 @@
   border: 2px solid rgba(84, 92, 202, 0.7);
 }
 
-.person-details .person-image {
+.item-details .item-image {
   width: 30%;
   height: 30%;
   border-radius: 10px;
 }
 
-.person-details .list-group-item {
+.item-details .list-group-item {
   padding: .25rem;
   background-color: rgba(68, 13, 74, 0.5);
   border-color:  rgba(84, 92, 202, 0.7);
 }
 
-.person-details .list-group-item .term{
+.item-details .list-group-item .term {
   margin-right: .5rem;
+}
+
+.item-details .error-button {
+  margin: 20px 0 0 0;
 }
