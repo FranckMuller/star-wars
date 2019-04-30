@@ -1,73 +1,95 @@
-import React, { Component, Fragment } from 'react';
-import ErrorButton from '../error-button';
+import React, { Component } from 'react';
+import SwapiService from "../../services/swapi-service";
 
 import './item-details.css';
 
+const swapiService = new SwapiService();
+
+const {
+  getPerson
+} = swapiService;
+
+const Record = ({ item, field, label }) => {
+  return (
+    <li className="list-group-item">
+      <span className="term">{label}</span>
+      <span>{ item[field] }</span>
+    </li>
+  );
+};
+
+export {
+  Record
+};
+
 class ItemDetails extends Component {
-
-  state = {
-    item: null
-  };
-
-  componentDidMount() {
-    this.updatePerson();
-  };
-
-  componentDidUpdate(prevProps) {
-    if(prevProps.selectedItemId !== this.props.selectedItemId) {
-      this.updatePerson();
-    }
-  };
-
-  updatePerson() {
-    const { getData, selectedItemId } = this.props;
-    if(!selectedItemId) return;
-    getData(selectedItemId)
-      .then((item) => {
-        this.setState({
-          item
-        })
-      });
-  };
-
   render() {
-    const { item } = this.state;
-    const view = item ? <ViewItemDetails item={item} /> : <span>Choose a person from list</span>  
+    const { image, name } = this.props;
 
     return (
       <div className="item-details card">
-        {view}
+        <img className="item-image"
+          src={image}
+          alt="item"/>
+
+        <div className="card-body">
+          <h4>{name}</h4>
+          <ul className="list-group list-group-flush">
+            {this.props.details}
+          </ul>
+        </div>
       </div>
     );
   };
 };
 
-const ViewItemDetails = ({ item }) => {
-  return (
-    <Fragment>
-      <img className="item-image"
-          src={item.image} alt={item.name} />
+const detailsWithData = (View, getData) => {
+  return class extends Component {
 
-        <div className="card-body">
-          <h4>{item.name}</h4>
-          <ul className="list-group list-group-flush">
-            <li className="list-group-item">
-              <span className="term">Gender</span>
-              <span>{item.gender}</span>
-            </li>
-            <li className="list-group-item">
-              <span className="term">Birth Year</span>
-              <span>{item.birthYear}</span>
-            </li>
-            <li className="list-group-item">
-              <span className="term">Eye Color</span>
-              <span>{item.eyeColor}</span>
-            </li>
-          </ul>
-          <ErrorButton />
-        </div>
-    </Fragment>
-  );
-};
+    state = {
+      item: null
+    };
 
-export default ItemDetails;
+    componentDidUpdate(prevProps) {
+      if(prevProps.itemId === this.props.itemId) return;
+      this.updateItem();
+    };
+
+    componentWillMount() {
+      this.updateItem();
+    }
+
+    updateItem() {
+      const { itemId } = this.props;
+      if(!itemId) return;
+      getData(itemId)
+        .then((item) => {
+          this.setState({
+            item
+          });
+        });
+    };
+
+    render() {
+
+      const { item } = this.state;
+
+      if(!item) return <span>Select a item from a list</span>;
+
+      const { image, name } = item;
+
+      const details = React.Children.map(this.props.children, (child) => {
+        return React.cloneElement(child, { item });
+      })
+
+      return(
+        <View 
+          details={details} 
+          image={image} 
+          name={name} />
+      )
+    }
+  }
+}
+
+export default detailsWithData(ItemDetails, getPerson);

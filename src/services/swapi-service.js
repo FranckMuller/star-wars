@@ -32,14 +32,14 @@ export default class SwapiService {
     return this._transformPlanetData(planet);
   };
 
-  async getAllStarships() {
+  getAllStarships = async () => {
     const res = await this.getResource(`/starships/`);
-    return res.results;
+    return res.results.map(this._transformStarshipData);
   };
 
   getStarship = async (id) => {
     const starship = await this.getResource(`/starships/${id}/`);
-    return this._transformPersonData(starship);
+    return this._transformStarshipData(starship);
   };
 
   _transformPlanetData = (planet) => {
@@ -65,6 +65,23 @@ export default class SwapiService {
       gender: person.gender,
       birthYear: person.birth_year,
       eyeColor: person.eye_color
-    }
-  }
-}
+    };
+  };
+
+  _transformStarshipData(starship) {
+    const idRegExp = /\/([0-9]*)\/$/;
+    const id = starship.url.match(idRegExp)[1];
+    return {
+      id,
+      image: `https://starwars-visualguide.com/assets/img/starships/${id}.jpg`,
+      name: starship.name,
+      model: starship.model,
+      manufacturer: starship.manufacturer,
+      costInCredits: starship.cost_in_credits,
+      length: starship.length,
+      crew: starship.crew,
+      passengers: starship.passengers,
+      cargoCapacity: starship.cargo_capacity
+    };
+  };
+};
