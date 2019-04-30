@@ -1,4 +1,4 @@
-import ItemDetails from '../item-details';
+import ItemDetails, { Record } from '../item-details';
 import SwapiService from '../../services/swapi-service';
 import { detailsWithData } from '../hoc-helpers';
 

@@ -7,6 +7,7 @@ import SwapiService from "../../services/swapi-service";
 
 import {
   PersonDetails,
+  PersonList,
   PlanetsList,
   StarshipsList
 } from '../sw-components';
@@ -23,8 +24,7 @@ export default class App extends Component {
           <Header />
 
           <PersonDetails 
-            itemId={11} 
-            getData={this.swapiService.getPerson}>
+            itemId={11} >
 
             <Record field="gender" label="Gender" />
             <Record field="birthYear" label="Birth Year" />
@@ -32,17 +32,9 @@ export default class App extends Component {
 
           </PersonDetails>
 
-          {/* <PersonList>
-            {(i) => i.name}
-          </PersonList>
-
-          <StarshipsList>
-            {(i) => i.name}
-          </StarshipsList>
-
-          <PlanetsList>
-            {(i) => i.name}
-          </PlanetsList> */}
+          <PersonList />
+          <StarshipsList />
+          <PlanetsList />
 
         </div>
     );
