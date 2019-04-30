@@ -6,7 +6,7 @@ import ItemDetails, { Record } from "../item-details";
 import SwapiService from "../../services/swapi-service";
 
 import {
-  PersonList,
+  PersonDetails,
   PlanetsList,
   StarshipsList
 } from '../sw-components';
@@ -22,7 +22,7 @@ export default class App extends Component {
         <div className="stardb-app">
           <Header />
 
-          <ItemDetails 
+          <PersonDetails 
             itemId={11} 
             getData={this.swapiService.getPerson}>
 
@@ -30,7 +30,7 @@ export default class App extends Component {
             <Record field="birthYear" label="Birth Year" />
             <Record field="eyeColor" label="Eye Color" />
 
-          </ItemDetails>
+          </PersonDetails>
 
           {/* <PersonList>
             {(i) => i.name}
