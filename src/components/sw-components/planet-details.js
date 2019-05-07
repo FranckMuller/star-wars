@@ -6,9 +6,9 @@ const DetailsWithChildren = (Wrapped) => {
   return (props) => {
       return (
         <Wrapped {...props} >
-          <Record field="population" label="Population" />
-          <Record field="rotationPeriod" label="Rotation Period" />
-          <Record field="diameter" label="Diameter" />
+          <Record field="population" label="Population:" />
+          <Record field="rotationPeriod" label="Rotation Period:" />
+          <Record field="diameter" label="Diameter:" />
         </Wrapped>
       )
   };

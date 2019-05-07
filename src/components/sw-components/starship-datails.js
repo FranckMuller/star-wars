@@ -6,8 +6,8 @@ const DetailsWithChildren = (Wrapped) => {
   return (props) => {
       return (
         <Wrapped {...props} >
-          <Record field="model" label="Model" />
-          <Record field="costInCredits" label="Cost" />
+          <Record field="model" label="Model:" />
+          <Record field="costInCredits" label="Cost:" />
         </Wrapped>
       )
   };
