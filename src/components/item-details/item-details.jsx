@@ -1,13 +1,5 @@
 import React, { Component } from 'react';
-import SwapiService from "../../services/swapi-service";
-
 import './item-details.css';
-
-const swapiService = new SwapiService();
-
-const {
-  getPerson
-} = swapiService;
 
 const Record = ({ item, field, label }) => {
   return (

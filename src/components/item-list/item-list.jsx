@@ -10,7 +10,7 @@ const ItemList = ({ data, onItemSelected, children: renderLabel }) => {
       <li 
         key={item.id}
         className="list-group-item"
-        onClick={() => onItemSelected(item.id)}>
+        onClick={() => onItemSelected(item.id)} >
         {label}
       </li>   
     );
