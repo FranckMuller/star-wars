@@ -11,6 +11,11 @@ const detailsWithData = (View) => {
       error: false
     };
 
+    componentDidMount() {
+      const { itemId } = this.props;
+      if(itemId) this.updateItem();
+    };
+
     componentDidUpdate(prevProps) {
       if(prevProps.itemId === this.props.itemId) return;
       this.updateItem();
@@ -40,9 +45,8 @@ const detailsWithData = (View) => {
     render() {
 
       const { item, loading, error } = this.state;
-      const { itemId } = this.props;
 
-      if(!itemId) return <span>Choose a item from list</span>
+      if(!item && !error) return <span>Choose a item from list</span>
 
       if(loading) return <Spinner/>
 
