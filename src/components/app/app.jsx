@@ -10,7 +10,8 @@ import {
   PeoplePage,
   PlanetsPage, 
   StarshipsPage,
-  LoginPage
+  LoginPage,
+  BonusPage
 } from '../pages';
 
 import './app.css';
@@ -19,11 +20,19 @@ class App extends Component {
 
   swapiService = new SwapiService();
 
+  state = {
+    isLogged: false
+  }
+
   onLoggedIn = () => {
-    console.log('log in');
+    this.setState({
+      isLogged: true
+    });
   };
 
   render() {
+    const { isLogged } = this.state;
+
     return (
       <SwapiServiceProvider value={this.swapiService}>
         <Router>
@@ -35,19 +44,25 @@ class App extends Component {
               render={() => <h2 className="welcome-message text-center">Welcome to Star Wars Application</h2>}
               exact />
             <Route path="/people/:id?" component={PeoplePage} />
-            <Route path="/planets" component={PlanetsPage} />
+            <Route path="/planets/:id?" component={PlanetsPage} />
             <Route path="/starships" component={StarshipsPage} exact />
             <Route 
               path="/starships/:id"
               render={({ match }) => {
                 const { id } = match.params;
-                return <StarshipDetails itemId={id} />
+                return <StarshipDetails singlePage itemId={id} />
               }} />
-              <Route path="/login" 
-              render={() => {
-                return <LoginPage onLoggedIn={this.onLoggedIn} />
-              }} />
-              <Route path="/secret" component={LoginPage} />
+              <Route 
+                path="/login" 
+                render={() => {
+                  return <LoginPage isLogged={isLogged} onLoggedIn={this.onLoggedIn} />
+                }} />
+              <Route 
+                path="/bonus" 
+                render={() => {
+                  return <BonusPage isLogged={isLogged} />
+                }}
+              />
           </div>
         </Router>
       </SwapiServiceProvider>

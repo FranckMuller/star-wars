@@ -45,8 +45,11 @@ const detailsWithData = (View) => {
     render() {
 
       const { item, loading, error } = this.state;
+      const { singlePage } = this.props;
 
-      if(!item && !error) return <span>Choose a item from list</span>
+      if(singlePage && !item && !error) return <Spinner/>
+
+      if(!singlePage && !item && !error) return <span>Choose a item from list</span>
 
       if(loading) return <Spinner/>
 
