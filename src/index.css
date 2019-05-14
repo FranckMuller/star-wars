@@ -15,3 +15,44 @@
 .row:last-child {
   margin-bottom: 0;
 }
+
+.bonus-page, .login-page {
+  padding: 1rem;
+  background-color: rgba(68, 13, 74, 0.5);
+  border: 2px solid rgba(84, 92, 202, 0.7);
+  display: flex;
+}
+
+.login-page {
+  justify-content: space-between;
+}
+
+.login-page button {
+  background-color: rgba(68, 13, 74, 0.5);
+  padding: 5px 20px;
+  display: block;
+  color: #ffffff;
+}
+
+.login-page h3 {
+  flex: 1;
+}
+
+.bonus-page h2 {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, .5);
+}
+
+.particles canvas {
+  filter: blur(1px);
+}

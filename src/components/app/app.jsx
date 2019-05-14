@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+import Particles from 'react-particles-js';
+import particlesConfig from '../../assets/particles/particlesjs-config';
 
 import Header from '../header';
 import RandomPlanet from '../random-planet';
@@ -16,6 +19,8 @@ import {
 
 import './app.css';
 
+const history = createBrowserHistory();
+
 class App extends Component {
 
   swapiService = new SwapiService();
@@ -25,6 +30,7 @@ class App extends Component {
   }
 
   onLoggedIn = () => {
+    history.push('/bonus')
     this.setState({
       isLogged: true
     });
@@ -35,7 +41,7 @@ class App extends Component {
 
     return (
       <SwapiServiceProvider value={this.swapiService}>
-        <Router>
+        <Router history={history}>
           <div className="stardb-app">
             <Header />
             <RandomPlanet />
@@ -64,6 +70,8 @@ class App extends Component {
                 }}
               />
           </div>
+          <Particles className="particles"
+            params={particlesConfig} />
         </Router>
       </SwapiServiceProvider>
     );

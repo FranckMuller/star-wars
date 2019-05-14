@@ -1,18 +1,21 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 
 const LoginPage = ({ isLogged, onLoggedIn }) => {
 
-  if(isLogged) return <Redirect to="/bonus" />
+  if(isLogged) {
+    return (
+      <div className="login-page">
+        <h3 className="text-center">You are already logged in!!!</h3>
+      </div>
+    );
+  };
 
   return (
-    <div>
+    <div className="login-page">
       <h3>You need to login for see bonus</h3>
-      <button
-        className="btn btn-primary"
-        onClick={onLoggedIn} >
+      <button onClick={onLoggedIn}>
         Log In
-        </button>
+      </button>
     </div>
   );
 };
