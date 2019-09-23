@@ -6,7 +6,6 @@ import particlesConfig from '../../assets/particles/particlesjs-config';
 
 import Header from '../header';
 import RandomPlanet from '../random-planet';
-import { StarshipDetails } from '../sw-components';
 import { SwapiServiceProvider }  from '../swapi-service-context';
 import SwapiService from '../../services/swapi-service';
 import { 
@@ -51,23 +50,17 @@ class App extends Component {
               exact />
             <Route path="/people/:id?" component={PeoplePage} />
             <Route path="/planets/:id?" component={PlanetsPage} />
-            <Route path="/starships" component={StarshipsPage} exact />
+            <Route path="/starships/:id?" component={StarshipsPage} />
             <Route 
-              path="/starships/:id"
-              render={({ match }) => {
-                const { id } = match.params;
-                return <StarshipDetails singlePage itemId={id} />
+              path="/login" 
+              render={() => {
+                return <LoginPage isLogged={isLogged} onLoggedIn={this.onLoggedIn} />
               }} />
-              <Route 
-                path="/login" 
-                render={() => {
-                  return <LoginPage isLogged={isLogged} onLoggedIn={this.onLoggedIn} />
-                }} />
-              <Route 
-                path="/bonus" 
-                render={() => {
-                  return <BonusPage isLogged={isLogged} />
-                }}
+            <Route 
+              path="/bonus" 
+              render={() => {
+                return <BonusPage isLogged={isLogged} />
+              }}
               />
           </div>
           <Particles className="particles"

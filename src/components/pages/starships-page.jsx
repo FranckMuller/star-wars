@@ -1,12 +1,20 @@
 import React from 'react';
-import { StarshipsList } from '../sw-components';
+import { StarshipsList, StarshipDetails } from '../sw-components';
+import Row from '../row';
 
-const StarshipsPage = ({ history }) => {
+const StarshipsPage = ({ history, match }) => {
     return (
-      <StarshipsList 
-        onItemSelected={(id) => {
+      // <StarshipsList 
+      //   onItemSelected={(id) => {
+      //     history.push(id);
+      // }} />
+
+       <Row 
+        left={<StarshipsList onItemSelected={(id) => {
           history.push(id);
-      }} />
+        }} />} 
+        right={<StarshipDetails itemId={match.params.id} />}
+      />
     );
 };
 
